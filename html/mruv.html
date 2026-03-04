@@ -1,11 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRUV</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Calculadora MRUV Completa</title>
+  <!-- TailwindCSS y Material Symbols para estilos -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <!-- Configuración de color, fuente y borderRadius -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2563EB",
+            secondary: "#0D9488",
+            success: "#475569",
+            accent: "#64748B",
+            "background-dark": "#0F172A",
+          },
+          fontFamily: { sans: ["Inter", "sans-serif"] },
+          borderRadius: { DEFAULT: "0.75rem" },
+        },
+      },
+    };
+  </script>
+  <style type="text/tailwindcss">
+    html { background-color: #0F172A; }
+    body { letter-spacing: -0.015em; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Animación para el auto en la pista */
+    .car-animation {
+      transition: left 2s cubic-bezier(.4,2,.6,1);
+    }
+  </style>
 </head>
-<body>
-    <h2>Here MRUV</h2>
+<body class="bg-background-dark font-sans text-slate-200 min-h-screen">
+<main class="max-w-5xl mx-auto px-4 pt-8 pb-16">
+  <!-- Título -->
+  <h1 class="text-3xl font-black mb-6 text-center uppercase text-primary">Calculadora MRUV Completa</h1>
+  <p class="mb-5 max-w-lg mx-auto text-center text-slate-400">
+    Deja vacíos los valores que quieras calcular (uno, varios o todos).
+  </p>
+  <!-- FORMULARIO DE ENTRADA DE DATOS -->
+  <section class="bg-slate-800 max-w-xl mx-auto rounded-2xl p-6 shadow-md border border-slate-700 mb-8">
+    <h2 class="text-xl font-bold mb-5 text-slate-200 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">analytics</span>Datos del Problema
+    </h2>
+    <form id="form-mruv" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- CAMPO: Velocidad Inicial -->
+      <div>
+        <label for="input-v0" class="text-xs font-bold text-slate-400 block mb-1 uppercase">
+          Velocidad Inicial (v₀)
+        </label>
+        <input id="input-v0" class="w-full pl-2 pr-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm text-white"
+               placeholder="Ej: 0" type="number" step="any"/>
+      </div>
+      <!-- CAMPO: Velocidad Final -->
+      <div>
+        <label for="input-vf" class="text-xs font-bold text-slate-400 block mb-1 uppercase">
+          Velocidad Final (v<sub>f</sub>)
+        </label>
+        <input id="input-vf" class="w-full pl-2 pr-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm text-white"
+               placeholder="" type="number" step="any"/>
+      </div>
+      <!-- CAMPO: Aceleración -->
+      <div>
+        <label for="input-a" class="text-xs font-bold text-slate-400 block mb-1 uppercase">
+          Aceleración (a)
+        </label>
+        <input id="input-a" class="w-full pl-2 pr-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm text-white"
+               placeholder="" type="number" step="any"/>
+      </div>
+      <!-- CAMPO: Tiempo -->
+      <div>
+        <label for="input-t" class="text-xs font-bold text-slate-400 block mb-1 uppercase">
+          Tiempo (t)
+        </label>
+        <input id="input-t" class="w-full pl-2 pr-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm text-white"
+               placeholder="" type="number" step="any"/>
+      </div>
+      <!-- CAMPO: Distancia -->
+      <div>
+        <label for="input-x" class="text-xs font-bold text-slate-400 block mb-1 uppercase">
+          Distancia (d)
+        </label>
+        <input id="input-x" class="w-full pl-2 pr-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm text-white"
+               placeholder="" type="number" step="any"/>
+      </div>
+      <!-- Botón -->
+      <div class="col-span-1 md:col-span-2 flex justify-end">
+        <button type="submit" id="btn-calcular"
+          class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl flex items-center justify-center gap-2 transition shadow-lg uppercase text-xs mt-4">
+          <span class="material-symbols-outlined text-lg">play_arrow</span>
+          Calcular
+        </button>
+      </div>
+    </form>
+  </section>
+  <!-- RESULTADOS MRUV -->
+  <section class="bg-slate-800 max-w-2xl mx-auto rounded-2xl p-6 shadow-sm border border-slate-700">
+    <h2 class="text-xl font-bold mb-6 text-slate-200 flex items-center gap-2">
+      <span class="material-symbols-outlined text-secondary">fact_check</span>Resultados
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="resultados-grid">
+      <div>
+        <p class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">Velocidad Inicial</p>
+        <div class="flex items-baseline gap-1"><span class="text-2xl font-extrabold text-primary" id="res-v0">-</span></div>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">Velocidad Final</p>
+        <div class="flex items-baseline gap-1"><span class="text-2xl font-extrabold text-secondary" id="res-vf">-</span></div>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">Aceleración</p>
+        <div class="flex items-baseline gap-1"><span class="text-2xl font-extrabold text-slate-200" id="res-a">-</span></div>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">Tiempo</p>
+        <div class="flex items-baseline gap-1"><span class="text-2xl font-extrabold text-primary" id="res-t">-</span></div>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">Distancia</p>
+        <div class="flex items-baseline gap-1"><span class="text-2xl font-extrabold text-secondary" id="res-x">-</span></div>
+      </div>
+    </div>
+  </section>
+  <!-- SIMULACIÓN VISUAL -->
+  <section class="bg-slate-800 max-w-2xl mx-auto rounded-2xl p-6 mt-8 shadow-sm border border-slate-700">
+    <h2 class="text-xl font-bold mb-6 text-slate-200 flex items-center gap-2">
+      <span class="material-symbols-outlined text-accent">directions_car</span>Simulación Visual
+    </h2>
+    <div id="mruv-simulador" class="relative bg-slate-900 rounded-xl h-24 overflow-hidden">
+      <!-- Línea/Pista -->
+      <div class="border-t-4 border-primary absolute left-0 right-0 bottom-10"></div>
+      <!-- El "carro" animado -->
+      <div id="carro" class="absolute left-0 bottom-3 car-animation" style="width:46px;height:28px;">
+        <svg viewBox="0 0 46 28" width="46" height="28">
+          <rect x="8" y="10" width="30" height="10" rx="4" fill="#2563eb"/>
+          <circle cx="14" cy="23" r="4" fill="#64748b"/>
+          <circle cx="32" cy="23" r="4" fill="#64748b"/>
+          <rect x="16" y="12" width="8" height="8" rx="2" fill="#a5b4fc"/>
+        </svg>
+      </div>
+      <!-- Meta visual -->
+      <div class="absolute right-2 bottom-5 w-1 h-12 bg-success rounded"></div>
+    </div>
+  </section>
+  <footer class="max-w-4xl mx-auto mt-10 px-4 text-xs text-slate-500 text-center">
+    © 2026 Calculadora MRUV Física I
+  </footer>
+</main>
+<script src="mruv.js"></script>
 </body>
 </html>
