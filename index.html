@@ -5,42 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>Física 1</title>
+    
 </head>
 <body>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+    <style>
+.hero-section{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.titulo-principal{
+font-size:60px;
+font-weight:700;
+color:white;
+letter-spacing:4px;
+margin-bottom:10px;
+}
+
+.subtitulo{
+font-size:18px;
+color:#cccccc;
+margin-bottom:40px;
+}
+
+.card{
+transform:scale(1.25);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.35);
+}
+</style>
     
     <section class="hero-section">
-        <div class="card-grid">
-            <a class="card" href="html/mru.html">
-                <div class="card__background" style="background-image: url(img//mru.png)"></div>
-                <div class="card__content">
-                    <p class="card__category">Física</p>
-                    <h3 class="card__heading">MRU</h3>
-                </div>
-            </a>
-            <a class="card" href="html/mruv.html">
-               <div class="card__background" style="background-image: url(img/mruv.png)"></div>
-                <div class="card__content">
-                    <p class="card__category">Física</p>
-                    <h3 class="card__heading">MRUV</h3>
-                </div>
-            </a>
-            <a class="card" href="html/caida.html">
-               <div class="card__background" style="background-image: url(img/caida.png)"></div>
-                <div class="card__content">
-                    <p class="card__category">Física</p>
-                    <h3 class="card__heading">Caída Libre</h3>
-                </div>
-            </a>
-            <a class="card" href="html//tiro.html">
-               <div class="card__background" style="background-image: url(img/parabolico.png)"></div>
-                <div class="card__content">
-                    <p class="card__category">Física</p>
-                    <h3 class="card__heading">Tiro Parabólico</h3>
-                </div>
-            </a>
-        </div>
-    </section>
+
+<h1 class="titulo-principal">FÍSICA I</h1>
+
+
+<p class="subtitulo">Calculadora de Movimiento Rectilíneo Uniformemente Variado</p>
+
+<div class="card-grid">
+
+<a class="card" href="html/mruv.html">
+
+<div class="card__background" style="background-image: url(img/mruv.png)"></div>
+
+<div class="card__content">
+<p class="card__category">Física</p>
+<h3 class="card__heading">MRUV</h3>
+</div>
+
+</a>
+
+</div>
+
+</section>
 
 </body>
 </html>

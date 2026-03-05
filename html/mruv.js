@@ -80,6 +80,21 @@ document.addEventListener("DOMContentLoaded", function() {
       t:  t.value,
       x:  x.value
     };
+    const mensajeError = document.getElementById("mensaje-error");
+
+let datosIngresados = 0;
+if (v0.value !== "") datosIngresados++;
+if (vf.value !== "") datosIngresados++;
+if (a.value !== "") datosIngresados++;
+if (t.value !== "") datosIngresados++;
+if (x.value !== "") datosIngresados++;
+
+if (datosIngresados !== 3) {
+  mensajeError.classList.remove("hidden");
+  return;
+} else {
+  mensajeError.classList.add("hidden");
+}
     const resultado = calcularMRUV(valores);
 
     if (v0.value === "") { resV0.textContent = (resultado.v0 !== null && !isNaN(resultado.v0)) ? resultado.v0.toFixed(2) : "—"; animateResult("res-v0"); }

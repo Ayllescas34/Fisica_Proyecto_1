@@ -38,7 +38,6 @@
 
   .card-grid{
    display: grid;
-   grid-template-columns: repeat(1, 1fr);
    grid-column-gap: var(--spacing-l);
    grid-row-gap: var(--spacing-l);
    max-width: var(--width-container);
@@ -80,7 +79,7 @@
    right: 0;
    top: 0;
    transform-origin: center;
-   trsnsform: scale(1) translateZ(0);
+   transform: scale(1) translateZ(0);
    transition: 
      filter 200ms linear,
      transform 200ms linear;
@@ -115,3 +114,7 @@
    line-height: 1.4;
    word-spacing: 100vw;
  }
+ul{
+    text-align: center;
+    list-style: none;
+}
