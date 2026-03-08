@@ -50,9 +50,3 @@ Este proyecto fue desarrollado utilizando tecnologías web básicas:
 - Aplicar conceptos de **física y programación**.
 - Crear una herramienta **educativa interactiva**.
 - Facilitar la **resolución de ejercicios de MRUV**.
-
----
-
-## 👨‍💻 Autores
-
-Proyecto desarrollado como parte de un **trabajo académico de física**.
